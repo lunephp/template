@@ -1,0 +1,29 @@
+{
+  "name": "lune/template",
+  "description": "PHP templates",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Willem Wollebrants",
+      "email": "willem@studiow.be"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0",
+    "lune/variables": "0.1.1a"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Lune\\Template\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Lune\\Template\\Tests\\": "tests"
+    }
+  }
+}
