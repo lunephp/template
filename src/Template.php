@@ -54,7 +54,7 @@ class Template implements TemplateCreatorInterface
         $this->getVariables()->remove($name);
     }
 
-    public function template($filename, $variables = []):TemplateCreatorInterface
+    public function template($filename, $variables = []):Template
     {
         return new Template($filename, $variables, $this);
     }
