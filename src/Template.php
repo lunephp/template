@@ -91,8 +91,6 @@ class Template implements TemplateCreatorInterface
         return $this->getParent()->getFunction($name, $scope);
     }
 
-
-
     public function render($variables = [])
     {
         ob_start();
