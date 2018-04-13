@@ -14,7 +14,9 @@
     "lune/variables": "^0.2.1"
   },
   "require-dev": {
-    "phpunit/phpunit": "^5.5"
+    "phpunit/phpunit": "^5.5",
+    "psr/http-message": "^1.0",
+    "guzzlehttp/psr7": "^1.4"
   },
   "autoload": {
     "psr-4": {
@@ -25,5 +27,8 @@
     "psr-4": {
       "Lune\\Template\\Tests\\": "tests"
     }
+  },
+  "suggest":{
+    "psr/http-message": "Use a psr-7 compatible library to render Http responses"
   }
 }
