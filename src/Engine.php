@@ -58,7 +58,6 @@ class Engine implements TemplateCreatorInterface
 
     public function registerFunction($name, callable $callback)
     {
-
         $this->functions->register($name, $callback);
     }
 }

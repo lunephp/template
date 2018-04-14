@@ -4,7 +4,9 @@
 namespace Lune\Template;
 
 
+use Lune\Template\Psr7\TemplateStream;
 use Lune\Variables\HasVariablesTrait;
+use Psr\Http\Message\ResponseInterface;
 
 class Template implements TemplateCreatorInterface
 {
@@ -28,7 +30,7 @@ class Template implements TemplateCreatorInterface
     }
 
 
-    public function getFilename():array
+    public function getFilename(): array
     {
         return $this->filename;
     }
@@ -39,7 +41,7 @@ class Template implements TemplateCreatorInterface
     }
 
 
-    public function getParent():TemplateCreatorInterface
+    public function getParent(): TemplateCreatorInterface
     {
         return $this->parent;
     }
@@ -54,7 +56,7 @@ class Template implements TemplateCreatorInterface
         $this->getVariables()->remove($name);
     }
 
-    public function template($filename, $variables = []):Template
+    public function template($filename, $variables = []): Template
     {
         return new Template($filename, $variables, $this);
     }
@@ -76,17 +78,17 @@ class Template implements TemplateCreatorInterface
         $this->bind($name, $value);
     }
 
-    public function locate($filename):string
+    public function locate($filename): string
     {
         return $this->getParent()->locate($filename);
     }
 
-    public function variables():array
+    public function variables(): array
     {
         return array_merge($this->getParent()->variables(), $this->getVariables()->all());
     }
 
-    public function getFunction($name, $scope = null):callable
+    public function getFunction($name, $scope = null): callable
     {
         return $this->getParent()->getFunction($name, $scope);
     }
@@ -97,5 +99,10 @@ class Template implements TemplateCreatorInterface
         extract(array_merge($this->variables(), $variables));
         include $this->locate($this->filename);
         return ob_get_clean();
+    }
+
+    public function response(ResponseInterface $response, $variables = []): ResponseInterface
+    {
+        return $response->withBody(new TemplateStream($this, $variables));
     }
 }
